@@ -7,6 +7,8 @@ lib.Noclip(instance) - puts noclip on anything
 
 lib.GetHatData(hatid, false or true) - returns the size and name of the hat | false is no notification, true is notification
 
+lib.GetHatFromMesh(hatid) - returns the hat from the mesh, works best with r15 and r6 compatible scripts and is the best way to detect a hat
+
 lib.ReanimationRigGet() - returns the reanimation rig instance for compatibility with all reanimations
 
 lib.LoadLibraryFix() - fixes the load library inside of your convert/script
