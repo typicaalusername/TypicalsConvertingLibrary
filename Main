@@ -25,6 +25,30 @@ function lib.GetHatData(HatId, notification)
 	return {Hat.Name, Hat.Handle.Size}
 end
 
+function lib.GetHatFromMesh(hatid)
+	local Hat = game:GetObjects("rbxassetid://"..tostring(hatid))[1]
+	local HatMesh = Hat.Handle:FindFirstChildOfClass("SpecialMesh")
+	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+		if v:IsA("Accessory") then
+			if v.Handle:IsA("MeshPart") then
+				if v.Handle.MeshId == HatMesh.MeshId then
+					print(v.Name)
+					return v
+					
+				end
+			elseif v.Handle:IsA("BasePart") then
+				if v.Handle:FindFirstChildOfClass("SpecialMesh") then
+					if v.Handle:FindFirstChildOfClass("SpecialMesh").MeshId == HatMesh.MeshId then						
+						print(v.Name)
+						
+						return v
+					end
+				end
+			end
+		end
+	end
+end
+
 function lib.ReanimationRigGet()
 	--local CompatRig = 
 	return workspace.Camera.CameraSubject.Parent;
