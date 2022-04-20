@@ -20,3 +20,5 @@ lib.FindHat(Name, Size) - finds the hat with the hat or size, size isnt needed |
 lib.Align(Part0, Part1, Position, Angle) - mostly no delay alignement | has velocity built in
 
 lib.Align2(Part0, Part1, Position, Angle) - same thing as Align1 but without velocity built in
+
+lib.RemoveMesh(instance) - removes the mesh of the instance | automatically finds the mesh without the name of it
