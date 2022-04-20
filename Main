@@ -1,0 +1,151 @@
+lib = {}
+
+function lib.Noclip(Character)
+	local char = Character or game.Players.LocalPlayer.Character
+	game.RunService.Stepped:Connect(function()
+		for i,v in pairs(char:GetChildren()) do
+			if v:IsA("BasePart") or v:IsA("MeshPart") then
+				v.CanCollide = false
+			end
+		end
+	end)
+end
+
+function lib.GetHatData(HatId, notification)
+	local Hat = game:GetObjects("rbxassetid://"..tostring(HatId))[1]
+	--print(Hat.Name)
+	if notification then
+	game.StarterGui:SetCore("SendNotification",  {
+		Title = "Hat data recieved!";
+		Text = "Hat Name: "..Hat.Name.."\n\nHandle Size: "..tostring(Hat.Handle.Size);
+		--Icon = iconyes;
+		Duration = 10;
+	})
+	end
+	return {Hat.Name, Hat.Handle.Size}
+end
+
+function lib.ReanimationRigGet()
+	--local CompatRig = 
+	return workspace.Camera.CameraSubject.Parent;
+end
+
+function lib.LoadLibraryFix()
+	loadstring(game:HttpGet("https://pastebin.com/raw/ZcMcKmLs"))()
+end
+
+function lib.Notification(title, text, icon, duration)
+	local titleyes = title or "Notification"
+	local textyes = text or "library made by typicalusername"
+	local iconyes = icon or nil
+	local durationyes = duration or 5
+	--game.Players:GetUserThumbnailAsync(game.Players.LocalPlayer.UserId, "HeadShot", Enum.ThumbnailSize.Size100x100);
+	game.StarterGui:SetCore("SendNotification",  {
+		Title = titleyes;
+		Text = textyes;
+		Icon = iconyes;
+		Duration = durationyes;
+	})
+end
+
+function lib.Net()
+if _G.typicalcool ~= true then
+    _G.typicalcool = true
+    game:GetService("RunService").Stepped:Connect(function()
+       workspace.FallenPartsDestroyHeight = 0/0
+       settings().Physics.AllowSleep = false
+       game:GetService("Players").LocalPlayer.ReplicationFocus = workspace
+       settings().Physics.ThrottleAdjustTime = 6 - math.huge
+        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 1000)
+    end)
+end
+print("Net executed")
+end
+
+function lib.FindHat(Name, Size)
+	local hatname = Name
+	local handlesize = Size or nil
+	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+		if v:IsA("Accessory") then
+			if hatname ~= nil and v.Name == hatname then
+				if handlesize ~= nil then
+					if v.Handle.Size == handlesize then
+						print("Hat found!")
+						return v
+					end
+				else
+					warn("Hat size not specified! Specify the hat size to get the exact hat!")
+					return v
+				end
+			end
+		end
+	end
+end
+
+function lib.Align(Part0, Part1, Position, Angle)
+    local AlignPosition = Instance.new("AlignPosition",Part0)
+    local AlignOrientation = Instance.new("AlignOrientation",Part0)
+    
+    local Attachment1 = Instance.new("Attachment", Part0)
+    local Attachment2 = Instance.new("Attachment", Part1)
+
+    AlignPosition.Attachment0 = Attachment1
+    AlignPosition.Attachment1 = Attachment2
+    
+    AlignOrientation.Attachment0 = Attachment1
+    AlignOrientation.Attachment1 = Attachment2
+    
+    Attachment2.Position = Position or Vector3.new(0,0,0)
+    Attachment2.Orientation = Angle or Vector3.new(0,0,0)
+    
+    AlignOrientation.MaxTorque = math.huge
+    AlignOrientation.MaxAngularVelocity = math.huge
+    AlignOrientation.PrimaryAxisOnly = false 
+    AlignOrientation.Responsiveness = 200
+    AlignOrientation.RigidityEnabled = false
+    AlignOrientation.ReactionTorqueEnabled = false
+    AlignPosition.MaxForce = 2626668
+    AlignPosition.MaxVelocity = math.huge
+    AlignPosition.ReactionForceEnabled = false
+    AlignPosition.Responsiveness = 200
+    AlignPosition.ApplyAtCenterOfMass = true
+    AlignPosition.RigidityEnabled = false
+    game:GetService("RunService").Heartbeat:Connect(function()
+        Part0.Velocity = Vector3.new(-35,0,0)
+    end)
+end
+
+function lib.Align2(Part0, Part1, Position, Angle)
+    local AlignPosition = Instance.new("AlignPosition",Part0)
+    local AlignOrientation = Instance.new("AlignOrientation",Part0)
+    local Attachment1 = Instance.new("Attachment", Part0)
+    local Attachment2 = Instance.new("Attachment", Part1)
+    AlignPosition.Attachment0 = Attachment1
+    AlignPosition.Attachment1 = Attachment2
+    AlignOrientation.Attachment0 = Attachment1
+    AlignOrientation.Attachment1 = Attachment2
+    Attachment2.Position = Position or Vector3.new(0,0,0)
+    Attachment2.Orientation = Angle or Vector3.new(0,0,0)
+    AlignOrientation.MaxTorque = math.huge
+    AlignOrientation.MaxAngularVelocity = math.huge
+    AlignOrientation.PrimaryAxisOnly = false 
+    AlignOrientation.Responsiveness = 200
+    AlignOrientation.RigidityEnabled = false
+    AlignOrientation.ReactionTorqueEnabled = false
+    AlignPosition.MaxForce = 2626668
+    AlignPosition.MaxVelocity = math.huge
+    AlignPosition.ReactionForceEnabled = false
+    AlignPosition.Responsiveness = 200
+    AlignPosition.ApplyAtCenterOfMass = true
+    AlignPosition.RigidityEnabled = false
+end
+
+function lib.RemoveMesh(Instance)
+	for i,v in pairs(Instance:GetChildren()) do
+		if v:IsA("SpecialMesh") then
+			v:Remove()
+		end
+	end
+end
+
+return lib;
