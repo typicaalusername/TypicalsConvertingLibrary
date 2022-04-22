@@ -1,0 +1,28 @@
+local NameClones = {} -- table for all hat name clones
+
+for instance,variable in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+    if variable:IsA("Accessory") then
+        if NameClones[variable.Name] then
+            if NameClones[variable.Name] == "NotClonedYet" then
+                NameClones[variable.Name] = {}
+            end
+            table.insert(NameClones[variable.Name], variable)
+        else
+            NameClones[v.Name] = "NotClonedYet"
+        end
+    end
+end
+
+for i,v in pairs(NameClones) do
+    if type(v) == "table" then
+        local funnynumber69uwu = 1
+        for uwu,ys in pairs(v) do
+            ys.Name = ys.Name.."-"..funnynumber69uwu
+            funnynumber69uwu = funnynumber69uwu + 1
+        end
+    end
+end
+
+NameClones = "hi"
+
+-- based off mizt's but i rewrote it
