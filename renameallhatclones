@@ -8,7 +8,7 @@ for instance,variable in pairs(game.Players.LocalPlayer.Character:GetChildren())
             end
             table.insert(NameClones[variable.Name], variable)
         else
-            NameClones[v.Name] = "NotClonedYet"
+            NameClones[variable.Name] = "NotClonedYet"
         end
     end
 end
