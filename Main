@@ -137,6 +137,7 @@ function lib.Align(Part0, Part1, Position, Angle)
     game:GetService("RunService").Heartbeat:Connect(function()
         Part0.Velocity = Vector3.new(-35,0,0)
     end)
+    return {Pos=Attachment2.Position,Ori=Attachment2.Orientation}
 end
 
 function lib.Align2(Part0, Part1, Position, Angle)
@@ -162,6 +163,7 @@ function lib.Align2(Part0, Part1, Position, Angle)
     AlignPosition.Responsiveness = 200
     AlignPosition.ApplyAtCenterOfMass = true
     AlignPosition.RigidityEnabled = false
+    return {Pos=Attachment2.Position,Ori=Attachment2.Orientation}
 end
 
 function lib.RemoveMesh(Instance)
