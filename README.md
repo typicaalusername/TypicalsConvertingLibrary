@@ -1,7 +1,8 @@
 # TypicalsConvertingLibrary
 a nice converting lib (that u can use for reanimations too btw!)
 
-# Docs
+with some extra features
+# Docs | Main
 
 lib.Noclip(instance) - puts noclip on anything
 
@@ -24,3 +25,11 @@ lib.Align(Part0, Part1, Position, Angle) - mostly no delay alignement | has velo
 lib.Align2(Part0, Part1, Position, Angle) - same thing as Align1 but without velocity built in
 
 lib.RemoveMesh(instance) - removes the mesh of the instance | automatically finds the mesh without the name of it
+
+# Docs | Animations
+
+lib.R6(rig.Animate) - gives your rig r6 animations
+
+# Docs | Hat Duplicate Finder
+
+execute the loadstring - renames all duplicates of the same hat or hat with the same exact name
