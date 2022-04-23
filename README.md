@@ -33,3 +33,7 @@ lib.R6(rig.Animate) - gives your rig r6 animations
 # Docs | Hat Duplicate Finder
 
 execute the loadstring - renames all duplicates of the same hat or hat with the same exact name
+
+# Docs | Anti-Ragdoll
+
+execute the loadstring - Removes all ragdoll scripts and constraints, recommended to put at the top of your reanimation
