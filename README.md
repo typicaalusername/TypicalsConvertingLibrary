@@ -2,6 +2,13 @@
 a nice converting lib (that u can use for reanimations too btw!)
 
 with some extra features
+
+# Main Usage
+
+```
+local Library = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/TypicallyAUser/TypicalsConvertingLibrary/main/Main", true))()
+```
+
 # Docs | Main
 
 lib.Noclip(instance) - puts noclip on anything
