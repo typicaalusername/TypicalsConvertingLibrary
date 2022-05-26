@@ -3,7 +3,7 @@ lib = {}
 function lib.Noclip(Character)
 	local char = Character or game.Players.LocalPlayer.Character
 	game.RunService.Stepped:Connect(function()
-		for i,v in pairs(char:GetChildren()) do
+		for i,v in pairs(char:GetDescendants()) do
 			if v:IsA("BasePart") or v:IsA("MeshPart") then
 				v.CanCollide = false
 			end
