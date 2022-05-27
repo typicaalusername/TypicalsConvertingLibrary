@@ -169,7 +169,9 @@ function lib.Align2(Part0, Part1, Position, Angle)
     AlignPosition2.ReactionForceEnabled = false
     AlignPosition2.Responsiveness = 200
     AlignPosition2.ApplyAtCenterOfMass = false
-    AlignPosition2.RigidityEnabled = false
+    AlignPosition2.RigidityEnabled = true
+    AlignPosition2.Attachment0 = Attachment1
+    AlignPosition2.Attachment1 = Attachment2
     return {Attachment2}
 end
 
