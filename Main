@@ -163,7 +163,7 @@ function lib.Align2(Part0, Part1, Position, Angle)
     AlignPosition.Responsiveness = 200
     AlignPosition.ApplyAtCenterOfMass = false
     AlignPosition.RigidityEnabled = true
-    local AlignPosition2 = Instance.new("AlignPosition",Part0)wd
+    local AlignPosition2 = Instance.new("AlignPosition",Part0)
     AlignPosition2.MaxForce = math.huge
     AlignPosition2.MaxVelocity = math.huge
     AlignPosition2.ReactionForceEnabled = false
