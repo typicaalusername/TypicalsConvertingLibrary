@@ -222,7 +222,7 @@ function lib.MakeTableOfHats(method_, data)
 		end
 	elseif method == "Mesh" then
 		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-			if v:IsA("Accessory") and v.Handle:FindFirstChild("SpecialMesh").MeshId == "rbxassetid://"..data.MeshId then
+			if v:IsA("Accessory") and v.Handle:FindFirstChild("SpecialMesh").MeshId == "rbxassetid://"..data["Mesh_Id"] then
 				table.insert(HatTable,v)
 				--print(v.Name)
 			end
