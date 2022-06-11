@@ -11,6 +11,9 @@ local Library = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/
 
 # Docs | Main
 
+lib.MakeTableOfHats(method, datatable) - methods : NameOnly, SizeOnly, NameAndSize | datatable usage : {Name="NAMEOFHAT", Size=Vector3.new(SIZE)}
+^ returns a table of hats, good for meshpartaccessory swords
+
 lib.Noclip(instance) - puts noclip on anything
 
 lib.GetHatData(hatid, false or true) - returns the size and name of the hat | false is no notification, true is notification
