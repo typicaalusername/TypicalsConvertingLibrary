@@ -196,35 +196,41 @@ end
 
 function lib.MakeTableOfHats(method_, data)
 	local method = method_ or "NameAndSize"
+	local HatTable = {}
 	if typeof(data) ~= "table" then
 		lib.Notification("error", "hey idiot u forgot to give me a table - hattablefunc")
 		return
 	end
 	if method == "NameAndSize" then
-		local HatTable = {}
 		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 			if v:IsA("Accessory") and v.Name:find(data.Name) and v.Handle.Size == data.Size then
 				table.insert(HatTable,v)
 			end
 		end
-		return HatTable;
 	elseif method == "NameOnly" then
-		local HatTable = {}
 		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 			if v:IsA("Accessory") and v.Name:find(data.Name) then
 				table.insert(HatTable,v)
 			end
 		end
-		return HatTable;
 	elseif method == "SizeOnly" then
-		local HatTable = {}
 		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 			if v:IsA("Accessory") and v.Handle.Size == data.Size then
 				table.insert(HatTable,v)
+				--print(v.Name)
 			end
 		end
-		return HatTable;
+	elseif method == "Mesh" then
+		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+			if v:IsA("Accessory") and v.Handle:FindFirstChild("SpecialMesh").MeshId == "rbxassetid://"..data.MeshId then
+				table.insert(HatTable,v)
+				--print(v.Name)
+			end
+		end
 	end
+	return HatTable;
 end
 
+--local e = lib.MakeTableOfHats("Mesh",{MeshId = 4755247775})
+--for i,v in pairs(e) do print(v.Name) end
 return lib;
