@@ -147,43 +147,35 @@ function lib.Align(Part0, Part1, Position, Angle)
     return {Attachment2}
 end
 
-function lib.Align2(Part0, Part1, Position, Angle)
+function lib.Align2(Part0,Part1,Position,Angle)
     local AlignPosition = Instance.new("AlignPosition",Part0)
-    local AlignPosition2 = Instance.new("AlignPosition",Part0)
     local AlignOrientation = Instance.new("AlignOrientation",Part0)
+    
     local Attachment1 = Instance.new("Attachment", Part0)
     local Attachment2 = Instance.new("Attachment", Part1)
-    
+
     AlignPosition.Attachment0 = Attachment1
     AlignPosition.Attachment1 = Attachment2
-    AlignPosition2.Attachment0 = Attachment1
-    AlignPosition2.Attachment1 = Attachment2
+    
     AlignOrientation.Attachment0 = Attachment1
     AlignOrientation.Attachment1 = Attachment2
+    
     Attachment2.Position = Position or Vector3.new(0,0,0)
     Attachment2.Orientation = Angle or Vector3.new(0,0,0)
     
-    AlignOrientation.MaxAngularVelocity = math.huge
     AlignOrientation.MaxTorque = math.huge
-    AlignOrientation.PrimaryAxisOnly = false
-    AlignOrientation.ReactionTorqueEnabled = false
+    AlignOrientation.MaxAngularVelocity = math.huge
+    AlignOrientation.PrimaryAxisOnly = false 
     AlignOrientation.Responsiveness = 200
     AlignOrientation.RigidityEnabled = false
-
-    AlignPosition.MaxForce = math.huge
+    AlignOrientation.ReactionTorqueEnabled = false
+    AlignPosition.MaxForce = 2626668
     AlignPosition.MaxVelocity = math.huge
     AlignPosition.ReactionForceEnabled = false
     AlignPosition.Responsiveness = 200
-    AlignPosition.ApplyAtCenterOfMass = false
-    AlignPosition.RigidityEnabled = true
-	
-    AlignPosition2.MaxForce = math.huge
-    AlignPosition2.MaxVelocity = math.huge
-    AlignPosition2.ReactionForceEnabled = false
-    AlignPosition2.Responsiveness = 200
-    AlignPosition.ApplyAtCenterOfMass = false
-    AlignPosition2.RigidityEnabled = false
-    return {Attachment1,Attachment2}
+    AlignPosition.ApplyAtCenterOfMass = true
+    AlignPosition.RigidityEnabled = false
+    return {Attachment2}
 end
 
 function lib.RemoveMesh(Instance)
