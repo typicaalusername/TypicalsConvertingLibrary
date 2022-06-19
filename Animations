@@ -1,8 +1,7 @@
 local Animations = {}
 	
-function Animations.R6(FOLDER)
-
-local Figure = FOLDER.Parent
+function Animations.R6(animScript)
+local Figure = animScript.Parent
 local Torso = Figure:WaitForChild("Torso")
 local RightShoulder = Torso:WaitForChild("Right Shoulder")
 local LeftShoulder = Torso:WaitForChild("Left Shoulder")
@@ -96,7 +95,7 @@ function configureAnimationSet(name, fileList)
 	animTable[name].connections = {}
 
 	-- check for config values
-	local config = FOLDER:FindFirstChild(name)
+	local config = animScript:FindFirstChild(name)
 	if (config ~= nil) then
 --		print("Loading anims " .. name)
 		table.insert(animTable[name].connections, config.ChildAdded:connect(function(child) configureAnimationSet(name, fileList) end))
@@ -144,8 +143,8 @@ function scriptChildModified(child)
 	end	
 end
 
-FOLDER.ChildAdded:connect(scriptChildModified)
-FOLDER.ChildRemoved:connect(scriptChildModified)
+animScript.ChildAdded:connect(scriptChildModified)
+animScript.ChildRemoved:connect(scriptChildModified)
 
 
 for name, fileList in pairs(animNames) do 
@@ -237,7 +236,7 @@ function playAnimation(animName, transitionTime, humanoid)
 		-- load it to the humanoid; get AnimationTrack
 		currentAnimTrack = humanoid:LoadAnimation(anim)
 		currentAnimTrack.Priority = Enum.AnimationPriority.Core
-			
+		 
 		-- play the animation
 		currentAnimTrack:Play(transitionTime)
 		currentAnim = animName
@@ -294,7 +293,7 @@ function playToolAnimation(animName, transitionTime, humanoid, priority)
 			if priority then
 				toolAnimTrack.Priority = priority
 			end
-				
+			 
 			-- play the animation
 			toolAnimTrack:Play(transitionTime)
 			toolAnimName = animName
@@ -437,15 +436,15 @@ local lastTick = 0
 function move(time)
 	local amplitude = 1
 	local frequency = 1
-		local deltaTime = time - lastTick
-		lastTick = time
+  	local deltaTime = time - lastTick
+  	lastTick = time
 
 	local climbFudge = 0
 	local setAngles = false
 
-		if (jumpAnimTime > 0) then
-			jumpAnimTime = jumpAnimTime - deltaTime
-		end
+  	if (jumpAnimTime > 0) then
+  		jumpAnimTime = jumpAnimTime - deltaTime
+  	end
 
 	if (pose == "FreeFall" and jumpAnimTime <= 0) then
 		playAnimation("fall", fallTransitionTime, Humanoid)
@@ -498,39 +497,34 @@ function move(time)
 	end
 end
 
+-- connect events
+Humanoid.Died:connect(onDied)
+Humanoid.Running:connect(onRunning)
+Humanoid.Jumping:connect(onJumping)
+Humanoid.Climbing:connect(onClimbing)
+Humanoid.GettingUp:connect(onGettingUp)
+Humanoid.FreeFalling:connect(onFreeFall)
+Humanoid.FallingDown:connect(onFallingDown)
+Humanoid.Seated:connect(onSeated)
+Humanoid.PlatformStanding:connect(onPlatformStanding)
+Humanoid.Swimming:connect(onSwimming)
 
-local events = {}
-local eventHum = Humanoid
-
-local function onUnhook()
-	for i = 1, #events do
-		events[i]:Disconnect()
+-- setup emote chat hook
+game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
+	local emote = ""
+	if msg == "/e dance" then
+		emote = dances[math.random(1, #dances)]
+	elseif (string.sub(msg, 1, 3) == "/e ") then
+		emote = string.sub(msg, 4)
+	elseif (string.sub(msg, 1, 7) == "/emote ") then
+		emote = string.sub(msg, 8)
 	end
-	events = {}
-end
-
-local function onHook()
-	onUnhook()
 	
-	pose = eventHum.Sit and "Seated" or "Standing"
-	
-	events = {
-		eventHum.Died:connect(onDied),
-		eventHum.Running:connect(onRunning),
-		eventHum.Jumping:connect(onJumping),
-		eventHum.Climbing:connect(onClimbing),
-		eventHum.GettingUp:connect(onGettingUp),
-		eventHum.FreeFalling:connect(onFreeFall),
-		eventHum.FallingDown:connect(onFallingDown),
-		eventHum.Seated:connect(onSeated),
-		eventHum.PlatformStanding:connect(onPlatformStanding),
-		eventHum.Swimming:connect(onSwimming)
-	}
-end
+	if (pose == "Standing" and emoteNames[emote] ~= nil) then
+		playAnimation(emote, 0.1, Humanoid)
+	end
 
-
-onHook()
---FOLDER:WaitForChild("Loaded").Value = true
+end)
 
 
 -- main program
@@ -539,27 +533,11 @@ onHook()
 playAnimation("idle", 0.1, Humanoid)
 pose = "Standing"
 
-spawn(function()
-	while Figure.Parent ~= nil do
-		local _, time = wait(0.1)
-		move(time)
-	end
-end)
-
-return {
-	onRunning = onRunning, 
-	onDied = onDied, 
-	onJumping = onJumping, 
-	onClimbing = onClimbing, 
-	onGettingUp = onGettingUp, 
-	onFreeFall = onFreeFall, 
-	onFallingDown = onFallingDown, 
-	onSeated = onSeated, 
-	onPlatformStanding = onPlatformStanding,
-	onHook = onHook,
-	onUnhook = onUnhook
-}
-
+while Figure.Parent ~= nil do
+	local _, time = wait(0.1)
+	move(time)
+end
+print("r6 animations loaded under rig "..animScript.Parent.Name)
 end
 
 return Animations;
