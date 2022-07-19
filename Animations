@@ -1,6 +1,7 @@
 local Animations = {}
 	
 function Animations.R6(animScript)
+spawn(function()
 local Figure = animScript.Parent
 local Torso = Figure:WaitForChild("Torso")
 local RightShoulder = Torso:WaitForChild("Right Shoulder")
@@ -538,6 +539,7 @@ while Figure.Parent ~= nil do
 	move(time)
 end
 print("r6 animations loaded under rig "..animScript.Parent.Name)
+end)
 end
 
 return Animations;
